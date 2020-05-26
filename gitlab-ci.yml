@@ -1,0 +1,16 @@
+image: axelbc1991/flutter-android-fastlane:1.9.1-28
+
+stages:
+- build
+
+build:
+  stage: build
+  script:
+  - flutter pub get
+  - flutter build apk
+  artifacts:
+    name: ${CI_PROJECT_TITLE}_${CI_BUILD_REF_NAME}_${CI_BUILD_ID}_apk
+    expire_in: 1 week
+    when: on_success
+    paths:
+    - build/app/outputs/apk/release/app-release.apk
